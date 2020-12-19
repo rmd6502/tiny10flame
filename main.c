@@ -2,18 +2,18 @@
 #include <avr/io.h>
 #include <stdint.h>
 
-extern uint32_t rand_31();
+extern uint16_t rand_31();
 
 volatile uint32_t millis = 0;
 
 ISR(TIM0_OVF_vect) {
-    static uint32_t nextChange = 0;
+    static uint16_t nextChange = 0;
     static int8_t nextValue = 0;
     static uint16_t divisor = 0;
     uint8_t shadow = OCR0A;
     static int8_t goingUp = 0;
     ++millis;
-    if (millis >= nextChange) {
+    if (nextChange == 0) {
         nextChange = rand_31() & 511;
         nextValue = ((rand_31() & 31) + 5);
         goingUp = rand_31() & 1;
@@ -31,6 +31,7 @@ ISR(TIM0_OVF_vect) {
         }
         OCR0A = shadow;
     }
+    --nextChange;
 }
 
 int main(void) {
