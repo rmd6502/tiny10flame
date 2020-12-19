@@ -28,6 +28,7 @@ ISR(TIM0_OVF_vect) {
         divisor += nextValue;
         while (divisor >= nextChange) {
             if (goingUp) shadow++; else shadow--;
+            divisor -= nextChange;
         }
         OCR0A = shadow;
     }
