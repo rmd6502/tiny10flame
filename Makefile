@@ -6,6 +6,7 @@ all: tiny10flame.elf
 
 tiny10flame.elf: main.o rand31.o
 	$(CC) $(CFLAGS) $^ -o $@
+	avr-size -C --mcu=attiny10 $@
 
 main.o: main.c
 
