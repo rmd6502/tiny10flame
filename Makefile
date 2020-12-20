@@ -2,9 +2,9 @@ CC=avr-gcc
 SIZE=avr-size
 CFLAGS=-Os -mmcu=attiny10
 
-all: tiny10flame
+all: tiny10flame.elf
 
-tiny10flame: main.o rand31.o
+tiny10flame.elf: main.o rand31.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 main.o: main.c
