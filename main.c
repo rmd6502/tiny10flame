@@ -51,4 +51,5 @@ int main(void) {
     TCCR0B |= 1 << CS00;
 
     OCR0A = 0;
+    while (1) ;
 }
